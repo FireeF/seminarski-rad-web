@@ -1,0 +1,174 @@
+/* Button Component Styles */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  min-height: 44px; /* Accessibility: minimum touch target */
+}
+
+.btn:focus {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.btn--small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 36px;
+}
+
+.btn--medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.btn--large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  min-height: 52px;
+}
+
+/* Variants */
+.btn--primary {
+  background-color: #4285f4;
+  color: white;
+}
+
+.btn--primary:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #3367d6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
+}
+
+.btn--secondary {
+  background-color: #f8f9fa;
+  color: #202124;
+  border: 1px solid #dadce0;
+}
+
+.btn--secondary:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #e8eaed;
+  border-color: #bdc1c6;
+}
+
+.btn--success {
+  background-color: #34a853;
+  color: white;
+}
+
+.btn--success:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #2d9946;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(52, 168, 83, 0.3);
+}
+
+.btn--warning {
+  background-color: #fbbc04;
+  color: #202124;
+}
+
+.btn--warning:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #f9ab00;
+  transform: translateY(-1px);
+}
+
+.btn--danger {
+  background-color: #ea4335;
+  color: white;
+}
+
+.btn--danger:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #d93025;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(234, 67, 53, 0.3);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: #4285f4;
+  border: 2px solid #4285f4;
+}
+
+.btn--outline:hover:not(.btn--disabled):not(.btn--loading) {
+  background-color: #4285f4;
+  color: white;
+}
+
+/* States */
+.btn--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn--loading {
+  cursor: wait;
+}
+
+.btn--loading .btn__content {
+  opacity: 0.7;
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+/* Icon and content */
+.btn__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.btn__content {
+  display: flex;
+  align-items: center;
+}
+
+/* Loading spinner */
+.btn__spinner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: currentColor;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .btn--medium {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .btn--large {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+} 
