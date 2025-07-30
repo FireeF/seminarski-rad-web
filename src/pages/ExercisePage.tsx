@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { usePageNavigation } from '../hooks/usePageNavigation';
@@ -36,7 +36,7 @@ const ExercisePage: React.FC = () => {
     }
   }, [lessonId]);
 
-  const handleSubmitAnswer = () => {
+  const handleSubmitAnswer = useCallback(() => {
     if (!exerciseManager || !userAnswer.trim()) return;
 
     const result = exerciseManager.submitAnswer(userAnswer);
@@ -46,9 +46,9 @@ const ExercisePage: React.FC = () => {
     if (result.correct) {
       updateScore(result.pointsEarned);
     }
-  };
+  }, [exerciseManager, userAnswer, updateScore]);
 
-  const handleNextExercise = () => {
+  const handleNextExercise = useCallback(() => {
     if (!exerciseManager) return;
     
     const hasNext = exerciseManager.nextExercise();
@@ -61,9 +61,26 @@ const ExercisePage: React.FC = () => {
       const lessonResult = exerciseManager.generateLessonResult(lessonId!);
       navigate('/profile');
     }
-  };
+  }, [exerciseManager, lessonId, navigate]);
 
-  const currentExercise = exerciseManager?.getCurrentExercise();
+  const handleAnswerChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserAnswer(e.target.value);
+  }, []);
+
+  const currentExercise = useMemo(() => 
+    exerciseManager?.getCurrentExercise(), 
+    [exerciseManager, showResult]
+  );
+
+  const exerciseProgress = useMemo(() => 
+    exerciseManager?.getProgress() || 0, 
+    [exerciseManager, showResult]
+  );
+
+  const currentExerciseIndex = useMemo(() => 
+    (exerciseManager as any)?.currentExerciseIndex + 1 || 1, 
+    [exerciseManager, showResult]
+  );
 
   if (!currentExercise) {
     return (
@@ -85,13 +102,13 @@ const ExercisePage: React.FC = () => {
       <div className="container">
         <div className="exercise-header">
           <div className="progress-info">
-            <div>Progress: {exerciseManager?.getProgress()}%</div>
+            <div>Progress: {exerciseProgress}%</div>
             <div>Time: {timer.formatTime}</div>
             <div>Points: {currentExercise.points}</div>
           </div>
         </div>
 
-                 <Card title={`Exercise ${(exerciseManager as any)?.currentExerciseIndex + 1 || 1}`}>
+        <Card title={`Exercise ${currentExerciseIndex}`}>
           <div className="exercise-content">
             <h3>{currentExercise.question}</h3>
             
@@ -115,9 +132,11 @@ const ExercisePage: React.FC = () => {
               <input
                 type="text"
                 value={userAnswer}
-                                 onChange={(e) => setUserAnswer(e.target.value)}
-                 placeholder="Enter your answer..."
-                 className="answer-input"
+                onChange={handleAnswerChange}
+                placeholder="Enter your answer..."
+                className="answer-input"
+                autoFocus
+                key={`input-${currentExerciseIndex}`}
               />
             )}
 
