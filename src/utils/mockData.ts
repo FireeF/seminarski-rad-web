@@ -1,7 +1,8 @@
 import { Language, Exercise, Lesson, LeaderboardEntry } from '../types';
 
-// Mock Languages Data
+// Expanded Mock Languages Data with more languages inspired by Duolingo
 export const mockLanguages: Language[] = [
+  // Popular European Languages
   {
     id: 'en',
     name: 'English',
@@ -12,13 +13,13 @@ export const mockLanguages: Language[] = [
     difficulty: 'beginner'
   },
   {
-    id: 'de',
-    name: 'German',
-    code: 'de',
-    flag: '🇩🇪',
-    description: 'Master German - spoken by over 100 million people in Europe.',
-    totalLessons: 45,
-    difficulty: 'intermediate'
+    id: 'es',
+    name: 'Spanish',
+    code: 'es',
+    flag: '🇪🇸',
+    description: 'Learn Spanish - spoken by 500+ million people worldwide.',
+    totalLessons: 52,
+    difficulty: 'beginner'
   },
   {
     id: 'fr',
@@ -30,13 +31,259 @@ export const mockLanguages: Language[] = [
     difficulty: 'intermediate'
   },
   {
-    id: 'es',
-    name: 'Spanish',
-    code: 'es',
-    flag: '🇪🇸',
-    description: 'Learn Spanish - spoken by 500+ million people worldwide.',
-    totalLessons: 52,
+    id: 'de',
+    name: 'German',
+    code: 'de',
+    flag: '🇩🇪',
+    description: 'Master German - spoken by over 100 million people in Europe.',
+    totalLessons: 45,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'it',
+    name: 'Italian',
+    code: 'it',
+    flag: '🇮🇹',
+    description: 'Learn Italian - the language of art, culture, and cuisine.',
+    totalLessons: 42,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'pt',
+    name: 'Portuguese',
+    code: 'pt',
+    flag: '🇵🇹',
+    description: 'Learn Portuguese - spoken in Brazil, Portugal, and across Africa.',
+    totalLessons: 40,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'ru',
+    name: 'Russian',
+    code: 'ru',
+    flag: '🇷🇺',
+    description: 'Master Russian - the most widely spoken Slavic language.',
+    totalLessons: 55,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'nl',
+    name: 'Dutch',
+    code: 'nl',
+    flag: '🇳🇱',
+    description: 'Learn Dutch - spoken in the Netherlands and Belgium.',
+    totalLessons: 38,
+    difficulty: 'intermediate'
+  },
+
+  // Asian Languages
+  {
+    id: 'zh',
+    name: 'Chinese',
+    code: 'zh',
+    flag: '🇨🇳',
+    description: 'Learn Mandarin Chinese - spoken by over 1 billion people.',
+    totalLessons: 60,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'ja',
+    name: 'Japanese',
+    code: 'ja',
+    flag: '🇯🇵',
+    description: 'Master Japanese - the language of technology and tradition.',
+    totalLessons: 65,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'ko',
+    name: 'Korean',
+    code: 'ko',
+    flag: '🇰🇷',
+    description: 'Learn Korean - increasingly popular worldwide thanks to K-pop and K-dramas.',
+    totalLessons: 50,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'hi',
+    name: 'Hindi',
+    code: 'hi',
+    flag: '🇮🇳',
+    description: 'Learn Hindi - one of the most spoken languages in the world.',
+    totalLessons: 45,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'th',
+    name: 'Thai',
+    code: 'th',
+    flag: '🇹🇭',
+    description: 'Learn Thai - the beautiful tonal language of Thailand.',
+    totalLessons: 40,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'vi',
+    name: 'Vietnamese',
+    code: 'vi',
+    flag: '🇻🇳',
+    description: 'Learn Vietnamese - spoken by over 90 million people.',
+    totalLessons: 42,
+    difficulty: 'advanced'
+  },
+
+  // Middle Eastern and African Languages
+  {
+    id: 'ar',
+    name: 'Arabic',
+    code: 'ar',
+    flag: '🇸🇦',
+    description: 'Learn Arabic - the liturgical language of Islam and spoken across the Middle East.',
+    totalLessons: 58,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'he',
+    name: 'Hebrew',
+    code: 'he',
+    flag: '🇮🇱',
+    description: 'Learn Hebrew - the ancient language revived as modern Hebrew.',
+    totalLessons: 45,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'tr',
+    name: 'Turkish',
+    code: 'tr',
+    flag: '🇹🇷',
+    description: 'Learn Turkish - the bridge between Europe and Asia.',
+    totalLessons: 43,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'sw',
+    name: 'Swahili',
+    code: 'sw',
+    flag: '🇰🇪',
+    description: 'Learn Swahili - widely spoken across East Africa.',
+    totalLessons: 35,
     difficulty: 'beginner'
+  },
+
+  // Nordic Languages
+  {
+    id: 'sv',
+    name: 'Swedish',
+    code: 'sv',
+    flag: '🇸🇪',
+    description: 'Learn Swedish - the melodic North Germanic language.',
+    totalLessons: 40,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'no',
+    name: 'Norwegian',
+    code: 'no',
+    flag: '🇳🇴',
+    description: 'Learn Norwegian - closely related to Danish and Swedish.',
+    totalLessons: 38,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'da',
+    name: 'Danish',
+    code: 'da',
+    flag: '🇩🇰',
+    description: 'Learn Danish - the language of Vikings and modern Scandinavia.',
+    totalLessons: 37,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'fi',
+    name: 'Finnish',
+    code: 'fi',
+    flag: '🇫🇮',
+    description: 'Learn Finnish - unique among European languages.',
+    totalLessons: 50,
+    difficulty: 'advanced'
+  },
+
+  // Other European Languages
+  {
+    id: 'pl',
+    name: 'Polish',
+    code: 'pl',
+    flag: '🇵🇱',
+    description: 'Learn Polish - the largest West Slavic language.',
+    totalLessons: 48,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'cs',
+    name: 'Czech',
+    code: 'cs',
+    flag: '🇨🇿',
+    description: 'Learn Czech - the beautiful language of Central Europe.',
+    totalLessons: 44,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'hu',
+    name: 'Hungarian',
+    code: 'hu',
+    flag: '🇭🇺',
+    description: 'Learn Hungarian - a unique Finno-Ugric language.',
+    totalLessons: 50,
+    difficulty: 'advanced'
+  },
+  {
+    id: 'ro',
+    name: 'Romanian',
+    code: 'ro',
+    flag: '🇷🇴',
+    description: 'Learn Romanian - the Romance language of Eastern Europe.',
+    totalLessons: 42,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'el',
+    name: 'Greek',
+    code: 'el',
+    flag: '🇬🇷',
+    description: 'Learn Greek - the foundation of Western civilization.',
+    totalLessons: 46,
+    difficulty: 'advanced'
+  },
+
+  // Constructed Languages (Fun additions)
+  {
+    id: 'eo',
+    name: 'Esperanto',
+    code: 'eo',
+    flag: '🌍',
+    description: 'Learn Esperanto - the international auxiliary language.',
+    totalLessons: 30,
+    difficulty: 'beginner'
+  },
+
+  // Celtic Languages
+  {
+    id: 'ga',
+    name: 'Irish',
+    code: 'ga',
+    flag: '🇮🇪',
+    description: 'Learn Irish Gaelic - the Celtic language of Ireland.',
+    totalLessons: 35,
+    difficulty: 'intermediate'
+  },
+  {
+    id: 'cy',
+    name: 'Welsh',
+    code: 'cy',
+    flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+    description: 'Learn Welsh - the Celtic language of Wales.',
+    totalLessons: 36,
+    difficulty: 'intermediate'
   }
 ];
 
@@ -198,8 +445,9 @@ export const mockSpanishExercises: Exercise[] = [
   }
 ];
 
-// Mock Lessons
+// Mock Lessons - Enhanced with better organization
 export const mockLessons: Lesson[] = [
+  // English Basics
   {
     id: 'en-lesson-1',
     title: 'Basic Greetings',
@@ -207,7 +455,7 @@ export const mockLessons: Lesson[] = [
     languageId: 'en',
     order: 1,
     exercises: mockEnglishExercises.filter(ex => ex.lessonId === 'en-lesson-1'),
-    isCompleted: false,
+    isCompleted: true, // Mark some as completed for demo
     category: 'vocabulary'
   },
   {
@@ -230,6 +478,8 @@ export const mockLessons: Lesson[] = [
     isCompleted: false,
     category: 'grammar'
   },
+  
+  // German Basics
   {
     id: 'de-lesson-1',
     title: 'Deutsche Grüße',
@@ -237,7 +487,7 @@ export const mockLessons: Lesson[] = [
     languageId: 'de',
     order: 1,
     exercises: mockGermanExercises.filter(ex => ex.lessonId === 'de-lesson-1'),
-    isCompleted: false,
+    isCompleted: true,
     category: 'vocabulary'
   },
   {
@@ -251,15 +501,69 @@ export const mockLessons: Lesson[] = [
     category: 'conversation'
   },
   {
+    id: 'de-lesson-3',
+    title: 'Die Familie',
+    description: 'Family members and relationships',
+    languageId: 'de',
+    order: 3,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+  {
+    id: 'de-lesson-4',
+    title: 'Deutsche Artikel',
+    description: 'Learn German articles (der, die, das)',
+    languageId: 'de',
+    order: 4,
+    exercises: [],
+    isCompleted: false,
+    category: 'grammar'
+  },
+  
+  // French Basics
+  {
     id: 'fr-lesson-1',
     title: 'Salutations Françaises',
     description: 'Essential French greetings and courtesy',
     languageId: 'fr',
     order: 1,
     exercises: mockFrenchExercises.filter(ex => ex.lessonId === 'fr-lesson-1'),
+    isCompleted: true,
+    category: 'vocabulary'
+  },
+  {
+    id: 'fr-lesson-2',
+    title: 'Se présenter',
+    description: 'Introduce yourself in French',
+    languageId: 'fr',
+    order: 2,
+    exercises: [],
+    isCompleted: false,
+    category: 'conversation'
+  },
+  {
+    id: 'fr-lesson-3',
+    title: 'Les nombres',
+    description: 'Numbers from 1 to 100',
+    languageId: 'fr',
+    order: 3,
+    exercises: [],
     isCompleted: false,
     category: 'vocabulary'
   },
+  {
+    id: 'fr-lesson-4',
+    title: 'Pronunciation Basics',
+    description: 'French pronunciation fundamentals',
+    languageId: 'fr',
+    order: 4,
+    exercises: [],
+    isCompleted: false,
+    category: 'pronunciation'
+  },
+  
+  // Spanish Basics
   {
     id: 'es-lesson-1',
     title: 'Saludos Españoles',
@@ -267,6 +571,134 @@ export const mockLessons: Lesson[] = [
     languageId: 'es',
     order: 1,
     exercises: mockSpanishExercises.filter(ex => ex.lessonId === 'es-lesson-1'),
+    isCompleted: true,
+    category: 'vocabulary'
+  },
+  {
+    id: 'es-lesson-2',
+    title: 'La familia',
+    description: 'Family members in Spanish',
+    languageId: 'es',
+    order: 2,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+  {
+    id: 'es-lesson-3',
+    title: 'Conversación básica',
+    description: 'Basic Spanish conversation',
+    languageId: 'es',
+    order: 3,
+    exercises: [],
+    isCompleted: false,
+    category: 'conversation'
+  },
+  {
+    id: 'es-lesson-4',
+    title: 'Presente de indicativo',
+    description: 'Present tense conjugations',
+    languageId: 'es',
+    order: 4,
+    exercises: [],
+    isCompleted: false,
+    category: 'grammar'
+  },
+  {
+    id: 'es-lesson-5',
+    title: 'Cultura Hispana',
+    description: 'Hispanic culture and traditions',
+    languageId: 'es',
+    order: 5,
+    exercises: [],
+    isCompleted: false,
+    category: 'culture'
+  },
+
+  // Japanese Basics
+  {
+    id: 'ja-lesson-1',
+    title: 'Hiragana Basics',
+    description: 'Learn the Hiragana alphabet',
+    languageId: 'ja',
+    order: 1,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+  {
+    id: 'ja-lesson-2',
+    title: 'Japanese Greetings',
+    description: 'Essential Japanese greetings',
+    languageId: 'ja',
+    order: 2,
+    exercises: [],
+    isCompleted: false,
+    category: 'conversation'
+  },
+  {
+    id: 'ja-lesson-3',
+    title: 'Polite Forms',
+    description: 'Japanese politeness levels',
+    languageId: 'ja',
+    order: 3,
+    exercises: [],
+    isCompleted: false,
+    category: 'grammar'
+  },
+
+  // Chinese Basics
+  {
+    id: 'zh-lesson-1',
+    title: 'Pinyin Basics',
+    description: 'Learn Chinese pronunciation with Pinyin',
+    languageId: 'zh',
+    order: 1,
+    exercises: [],
+    isCompleted: false,
+    category: 'pronunciation'
+  },
+  {
+    id: 'zh-lesson-2',
+    title: 'Chinese Numbers',
+    description: 'Numbers 1-10 in Chinese',
+    languageId: 'zh',
+    order: 2,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+
+  // Italian Basics
+  {
+    id: 'it-lesson-1',
+    title: 'Ciao Italia!',
+    description: 'Basic Italian greetings',
+    languageId: 'it',
+    order: 1,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+  {
+    id: 'it-lesson-2',
+    title: 'La famiglia italiana',
+    description: 'Italian family vocabulary',
+    languageId: 'it',
+    order: 2,
+    exercises: [],
+    isCompleted: false,
+    category: 'vocabulary'
+  },
+
+  // Portuguese Basics
+  {
+    id: 'pt-lesson-1',
+    title: 'Olá Portugal!',
+    description: 'Portuguese greetings and basic phrases',
+    languageId: 'pt',
+    order: 1,
+    exercises: [],
     isCompleted: false,
     category: 'vocabulary'
   }
