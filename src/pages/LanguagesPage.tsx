@@ -288,17 +288,7 @@ const LanguagesPage: React.FC = () => {
           </div>
         )}
 
-        {/* Footer Info */}
-        <div className="languages-footer">
-          <h3>🚀 Powered by AI & Open APIs</h3>
-          <p style={{ margin: '0.5rem 0', color: '#666' }}>
-            Our language courses are enhanced with real-world content from free dictionaries and language databases.
-            Each course includes vocabulary, grammar, and conversation practice.
-          </p>
-          <p style={{ fontSize: '0.9rem', color: '#888' }}>
-            Built with ❤️ using Free Dictionary API, FreeDict, and community-driven language resources.
-          </p>
-        </div>
+
       </div>
     </div>
   );
