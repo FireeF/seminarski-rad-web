@@ -140,6 +140,30 @@
   animation-delay: 1.5s;
 }
 
+.floating-lang--5 {
+  top: 60%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+.floating-lang--6 {
+  top: 60%;
+  right: 10%;
+  animation-delay: 2.5s;
+}
+
+.floating-lang--7 {
+  top: 10%;
+  left: 50%;
+  animation-delay: 3s;
+}
+
+.floating-lang--8 {
+  bottom: 10%;
+  left: 50%;
+  animation-delay: 3.5s;
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(5deg); }

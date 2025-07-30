@@ -44,15 +44,15 @@ const HomePage: React.FC = () => {
             
             <div className="hero__stats">
               <div className="stat">
-                <span className="stat__number">4</span>
+                <span className="stat__number">27+</span>
                 <span className="stat__label">Languages</span>
               </div>
               <div className="stat">
-                <span className="stat__number">100+</span>
+                <span className="stat__number">200+</span>
                 <span className="stat__label">Lessons</span>
               </div>
               <div className="stat">
-                <span className="stat__number">500+</span>
+                <span className="stat__number">1000+</span>
                 <span className="stat__label">Exercises</span>
               </div>
             </div>
@@ -62,8 +62,30 @@ const HomePage: React.FC = () => {
                 size="large"
                 onClick={handleGetStarted}
                 className="hero__cta"
+                style={{
+                  background: 'linear-gradient(135deg, #58cc02, #87e300)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '1rem 2rem',
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold'
+                }}
               >
-                {state.user ? 'Continue Learning' : 'Start Learning'}
+                {state.user ? '🚀 Continue Learning' : '🎯 Start Learning Now'}
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="large"
+                onClick={() => navigate('/languages')}
+                style={{
+                  color: '#58cc02',
+                  borderColor: '#58cc02',
+                  borderWidth: '2px',
+                  fontWeight: 'bold'
+                }}
+              >
+                📚 Browse Languages
               </Button>
               
               {!state.user && (
@@ -71,6 +93,10 @@ const HomePage: React.FC = () => {
                   variant="outline"
                   size="large"
                   onClick={() => navigate('/login')}
+                  style={{
+                    color: '#666',
+                    borderColor: '#666'
+                  }}
                 >
                   Sign In
                 </Button>
@@ -84,6 +110,10 @@ const HomePage: React.FC = () => {
               <span className="floating-lang floating-lang--2">🇩🇪</span>
               <span className="floating-lang floating-lang--3">🇫🇷</span>
               <span className="floating-lang floating-lang--4">🇪🇸</span>
+              <span className="floating-lang floating-lang--5">🇯🇵</span>
+              <span className="floating-lang floating-lang--6">🇨🇳</span>
+              <span className="floating-lang floating-lang--7">🇰🇷</span>
+              <span className="floating-lang floating-lang--8">🇮🇹</span>
             </div>
           </div>
         </div>
@@ -133,13 +163,13 @@ const HomePage: React.FC = () => {
       {/* Languages Section */}
       <section className="languages-preview">
         <div className="container">
-          <h2>Choose Your Language</h2>
+          <h2>🌍 Popular Languages to Learn</h2>
           <p className="section-subtitle">
-            Start learning one of our available languages
+            Choose from our most popular language courses and start your journey today
           </p>
           
           <div className="languages-grid">
-            {mockLanguages.map((language) => (
+            {mockLanguages.slice(0, 8).map((language) => (
               <Card
                 key={language.id}
                 title={`${language.flag} ${language.name}`}
@@ -150,7 +180,7 @@ const HomePage: React.FC = () => {
               >
                 <p>{language.description}</p>
                 <div className="language-stats">
-                  <span className="difficulty-badge difficulty-badge--{language.difficulty}">
+                  <span className={`difficulty-badge difficulty-badge--${language.difficulty}`}>
                     {language.difficulty}
                   </span>
                 </div>
@@ -160,11 +190,27 @@ const HomePage: React.FC = () => {
 
           <div className="languages-cta">
             <Button
-              variant="outline"
+              size="large"
               onClick={() => navigate('/languages')}
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                padding: '1rem 2rem',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                border: 'none',
+                marginTop: '2rem'
+              }}
             >
-              View All Languages
+              🚀 Explore All 27+ Languages
             </Button>
+            <p style={{ 
+              marginTop: '1rem', 
+              color: '#666', 
+              fontSize: '0.9rem' 
+            }}>
+              European • Asian • African • and more!
+            </p>
           </div>
         </div>
       </section>
