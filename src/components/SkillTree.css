@@ -1,0 +1,277 @@
+.skill-tree {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(180deg, #58cc02 0%, #87e300 100%);
+  min-height: 100vh;
+}
+
+.skill-tree__header {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.skill-tree__title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.skill-tree__subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.skill-tree__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Skill Unit Styles */
+.skill-unit {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 3px solid #e5e5e5;
+  transition: all 0.3s ease;
+}
+
+.skill-unit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.skill-unit__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-unit__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 3px solid white;
+}
+
+.skill-unit__icon--completed {
+  background: linear-gradient(135deg, #58cc02, #87e300) !important;
+}
+
+.skill-unit__icon--started {
+  background: linear-gradient(135deg, #ff9600, #ffb84d) !important;
+}
+
+.skill-unit__icon--available {
+  background: linear-gradient(135deg, #afafaf, #cfcfcf) !important;
+}
+
+.skill-unit__info {
+  flex: 1;
+}
+
+.skill-unit__title {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-weight: 700;
+}
+
+.skill-unit__description {
+  color: #777;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.skill-unit__progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+/* Lessons */
+.skill-unit__lessons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lesson-bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 12px;
+  min-width: 80px;
+}
+
+.lesson-bubble:hover {
+  transform: translateY(-3px);
+}
+
+.lesson-bubble__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 3px solid white;
+}
+
+.lesson-bubble--completed .lesson-bubble__icon {
+  background: var(--unit-color, #58cc02);
+}
+
+.lesson-bubble--available .lesson-bubble__icon {
+  background: #e5e5e5;
+  color: #999;
+}
+
+.lesson-bubble--locked .lesson-bubble__icon {
+  background: #bbb;
+  color: #777;
+}
+
+.lesson-bubble__title {
+  font-size: 0.8rem;
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Connector Line */
+.skill-unit__connector {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 2rem;
+  background: linear-gradient(180deg, #58cc02, #87e300);
+  border-radius: 2px;
+}
+
+/* Stats Section */
+.skill-tree__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border: 2px solid #e5e5e5;
+}
+
+.stat-card__number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #58cc02;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card__label {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .skill-tree {
+    padding: 1rem;
+  }
+  
+  .skill-tree__title {
+    font-size: 2rem;
+  }
+  
+  .skill-unit__header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .skill-unit__icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .skill-unit__lessons {
+    justify-content: center;
+  }
+  
+  .lesson-bubble__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .skill-tree__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-tree__stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .skill-unit {
+    padding: 1rem;
+  }
+  
+  .lesson-bubble {
+    min-width: 60px;
+  }
+} 
