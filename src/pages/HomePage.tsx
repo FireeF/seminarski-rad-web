@@ -68,7 +68,8 @@ const HomePage: React.FC = () => {
                   border: 'none',
                   padding: '1rem 2rem',
                   fontSize: '1.2rem',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  borderRadius: '25px'
                 }}
               >
                 {state.user ? '🚀 Continue Learning' : '🎯 Start Learning Now'}
@@ -82,7 +83,8 @@ const HomePage: React.FC = () => {
                   color: '#58cc02',
                   borderColor: '#58cc02',
                   borderWidth: '2px',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  borderRadius: '25px'
                 }}
               >
                 📚 Browse Languages
@@ -95,7 +97,8 @@ const HomePage: React.FC = () => {
                   onClick={() => navigate('/login')}
                   style={{
                     color: '#666',
-                    borderColor: '#666'
+                    borderColor: '#666',
+                    borderRadius: '25px'
                   }}
                 >
                   Sign In
@@ -199,7 +202,8 @@ const HomePage: React.FC = () => {
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
                 border: 'none',
-                marginTop: '2rem'
+                marginTop: '2rem',
+                borderRadius: '25px'
               }}
             >
               🚀 Explore All 27+ Languages
