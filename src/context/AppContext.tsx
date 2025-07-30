@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useCallback } from 'react';
 import { User, Language, UserProgress, Exercise, LessonResult } from '../types';
 
 // State interface
@@ -133,45 +133,45 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Action creators
-  const setUser = (user: User | null) => {
+  const setUser = useCallback((user: User | null) => {
     dispatch({ type: 'SET_USER', payload: user });
-  };
+  }, []);
 
-  const setCurrentLanguage = (language: Language | null) => {
+  const setCurrentLanguage = useCallback((language: Language | null) => {
     dispatch({ type: 'SET_CURRENT_LANGUAGE', payload: language });
-  };
+  }, []);
 
-  const setUserProgress = (progress: UserProgress | null) => {
+  const setUserProgress = useCallback((progress: UserProgress | null) => {
     dispatch({ type: 'SET_USER_PROGRESS', payload: progress });
-  };
+  }, []);
 
-  const setCurrentLesson = (exercises: Exercise[] | null) => {
+  const setCurrentLesson = useCallback((exercises: Exercise[] | null) => {
     dispatch({ type: 'SET_CURRENT_LESSON', payload: exercises });
-  };
+  }, []);
 
-  const setLoading = (loading: boolean) => {
+  const setLoading = useCallback((loading: boolean) => {
     dispatch({ type: 'SET_LOADING', payload: loading });
-  };
+  }, []);
 
-  const setError = (error: string | null) => {
+  const setError = useCallback((error: string | null) => {
     dispatch({ type: 'SET_ERROR', payload: error });
-  };
+  }, []);
 
-  const setLanguages = (languages: Language[]) => {
+  const setLanguages = useCallback((languages: Language[]) => {
     dispatch({ type: 'SET_LANGUAGES', payload: languages });
-  };
+  }, []);
 
-  const updateScore = (points: number) => {
+  const updateScore = useCallback((points: number) => {
     dispatch({ type: 'UPDATE_SCORE', payload: points });
-  };
+  }, []);
 
-  const completeLesson = (result: LessonResult) => {
+  const completeLesson = useCallback((result: LessonResult) => {
     dispatch({ type: 'COMPLETE_LESSON', payload: result });
-  };
+  }, []);
 
-  const resetState = () => {
+  const resetState = useCallback(() => {
     dispatch({ type: 'RESET_STATE' });
-  };
+  }, []);
 
   const value: AppContextType = {
     state,
