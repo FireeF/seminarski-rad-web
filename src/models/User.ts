@@ -1,4 +1,4 @@
-import { User as IUser, UserProgress, ExerciseResult } from '../types';
+import { User as IUser, UserProgress, ExerciseResult, Achievement } from '../types';
 
 export class User implements IUser {
   id: string;
@@ -10,6 +10,7 @@ export class User implements IUser {
   joinedDate: Date;
   completedLessons: string[];
   currentLanguage?: string;
+  achievements: Achievement[];
 
   constructor(
     id: string,
@@ -26,6 +27,45 @@ export class User implements IUser {
     this.joinedDate = new Date();
     this.completedLessons = [];
     this.currentLanguage = currentLanguage;
+    this.achievements = this.initializeAchievements();
+  }
+
+  // Inicijalizacija dostignuća
+  private initializeAchievements(): Achievement[] {
+    return [
+      {
+        id: 'first-lesson',
+        title: 'First Steps',
+        description: 'Complete your first lesson',
+        unlocked: false,
+        points: 10,
+        progress: 0
+      },
+      {
+        id: 'streak-7',
+        title: 'Week Warrior',
+        description: 'Maintain a 7-day streak',
+        unlocked: false,
+        points: 50,
+        progress: 0
+      },
+      {
+        id: 'score-1000',
+        title: 'Thousand Club',
+        description: 'Reach 1000 total points',
+        unlocked: false,
+        points: 100,
+        progress: 0
+      },
+      {
+        id: 'polyglot',
+        title: 'Polyglot',
+        description: 'Start learning 3 different languages',
+        unlocked: false,
+        points: 75,
+        progress: 0
+      }
+    ];
   }
 
   // Metoda za dodavanje poena
@@ -33,6 +73,7 @@ export class User implements IUser {
     this.currentScore += points;
     this.totalScore += points;
     this.updateStreak();
+    this.checkAchievements();
   }
 
   // Metoda za resetovanje trenutnog skora
@@ -44,7 +85,37 @@ export class User implements IUser {
   completeLesson(lessonId: string): void {
     if (!this.completedLessons.includes(lessonId)) {
       this.completedLessons.push(lessonId);
+      this.checkAchievements();
     }
+  }
+
+  // Metoda za proveru i ažuriranje dostignuća
+  private checkAchievements(): void {
+    this.achievements.forEach(achievement => {
+      switch (achievement.id) {
+        case 'first-lesson':
+          if (this.completedLessons.length >= 1 && !achievement.unlocked) {
+            achievement.unlocked = true;
+            achievement.unlockedAt = new Date();
+            achievement.progress = 100;
+          }
+          break;
+        case 'streak-7':
+          achievement.progress = Math.min((this.streak / 7) * 100, 100);
+          if (this.streak >= 7 && !achievement.unlocked) {
+            achievement.unlocked = true;
+            achievement.unlockedAt = new Date();
+          }
+          break;
+        case 'score-1000':
+          achievement.progress = Math.min((this.totalScore / 1000) * 100, 100);
+          if (this.totalScore >= 1000 && !achievement.unlocked) {
+            achievement.unlocked = true;
+            achievement.unlockedAt = new Date();
+          }
+          break;
+      }
+    });
   }
 
   // Metoda za računanje nivoa korisnika
@@ -82,6 +153,7 @@ export class User implements IUser {
     user.streak = data.streak || 0;
     user.joinedDate = new Date(data.joinedDate);
     user.completedLessons = data.completedLessons || [];
+    user.achievements = data.achievements || user.initializeAchievements();
 
     return user;
   }
@@ -97,7 +169,8 @@ export class User implements IUser {
       streak: this.streak,
       joinedDate: this.joinedDate,
       completedLessons: [...this.completedLessons],
-      currentLanguage: this.currentLanguage
+      currentLanguage: this.currentLanguage,
+      achievements: [...this.achievements]
     };
   }
 } 
