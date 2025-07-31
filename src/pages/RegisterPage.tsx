@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { usePageNavigation } from '../hooks/usePageNavigation';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { User } from '../models/User';
@@ -9,40 +8,34 @@ import { User } from '../models/User';
 const RegisterPage: React.FC = () => {
   const { setUser } = useAppContext();
   const { navigate } = usePageNavigation();
-  const [storedUsers, setStoredUsers] = useLocalStorage<any[]>('users', []);
   
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     // Validation
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (password.length < 6) {
       setError('Password must be at least 6 characters');
       return;
     }
 
+    // Get existing users from localStorage
+    const storedUsersString = localStorage.getItem('users');
+    const storedUsers = storedUsersString ? JSON.parse(storedUsersString) : [];
+
     // Check if username already exists
-    const existingUser = storedUsers.find(user => user.username === formData.username);
+    const existingUser = storedUsers.find((user: any) => user.username === username);
     if (existingUser) {
       setError('Username already exists');
       return;
@@ -51,22 +44,23 @@ const RegisterPage: React.FC = () => {
     // Create new user
     const newUser = new User(
       Date.now().toString(),
-      formData.username,
-      formData.email
+      username,
+      email
     );
 
     const userData = {
       ...newUser.export(),
-      password: formData.password // In real app, this would be hashed
+      password: password // In real app, this would be hashed
     };
 
     // Save to localStorage
-    setStoredUsers([...storedUsers, userData]);
+    const updatedUsers = [...storedUsers, userData];
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
     setUser(newUser.export());
     localStorage.setItem('currentUser', JSON.stringify(newUser.export()));
 
     navigate('/');
-  };
+  }, [username, email, password, confirmPassword, setUser, navigate]);
 
   return (
     <div className="register-page">
@@ -79,9 +73,10 @@ const RegisterPage: React.FC = () => {
                 <input
                   type="text"
                   name="username"
-                  value={formData.username}
-                  onChange={handleInputChange}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
+                  autoComplete="username"
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -97,9 +92,10 @@ const RegisterPage: React.FC = () => {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  autoComplete="email"
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -115,9 +111,10 @@ const RegisterPage: React.FC = () => {
                 <input
                   type="password"
                   name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
+                  autoComplete="new-password"
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -133,9 +130,10 @@ const RegisterPage: React.FC = () => {
                 <input
                   type="password"
                   name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
+                  autoComplete="new-password"
                   style={{
                     width: '100%',
                     padding: '0.75rem',
@@ -176,4 +174,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage; 
+export default RegisterPage;
