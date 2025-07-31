@@ -10,7 +10,8 @@ export const mockLanguages: Language[] = [
     flag: '🇺🇸',
     description: 'Learn English - the global language of communication, business, and the internet.',
     totalLessons: 50,
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    isActive: true
   },
   {
     id: 'es',
@@ -19,7 +20,8 @@ export const mockLanguages: Language[] = [
     flag: '🇪🇸',
     description: 'Learn Spanish - spoken by 500+ million people worldwide.',
     totalLessons: 52,
-    difficulty: 'beginner'
+    difficulty: 'beginner',
+    isActive: true
   },
   {
     id: 'fr',

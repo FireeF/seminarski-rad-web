@@ -10,6 +10,18 @@ export interface User {
   joinedDate: Date;
   completedLessons: string[];
   currentLanguage?: string;
+  achievements: Achievement[];
+}
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  unlocked: boolean;
+  unlockedAt?: Date;
+  icon?: string;
+  points?: number;
+  progress?: number;
 }
 
 export interface Language {

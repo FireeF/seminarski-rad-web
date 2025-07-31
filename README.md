@@ -1,25 +1,32 @@
 # LinguaLearn - Language Learning Web Application
 
-## 📖 Opis
+## 📖 Opis projekta
 
-LinguaLearn je interaktivna veb aplikacija za učenje jezika, inspirisana Duolingo platformom. Aplikacija omogućava korisnicima da uče najmanje dva jezika kroz različite tipove vežbi, prate svoj napredak i takmiče se sa drugim korisnicima.
+LinguaLearn je moderna interaktivna veb aplikacija za učenje stranih jezika kroz gamifikovano iskustvo. Inspirisana popularnim platformama poput Duolingo, aplikacija omogućava korisnicima da uče 27+ jezika kroz različite tipove interaktivnih vežbi, prate svoj napredak kroz vizuelni skill tree sistem i takmiče se sa drugim korisnicima na globalnoj rang listi.
 
 ### 🌟 Ključne funkcionalnosti
 
-- **Višejezična podrška**: Učenje engleskog, nemačkog, francuskog i španskog jezika
-- **Tri tipa vežbi**: Multiple choice, translation i fill-in-the-blank zadaci
-- **Praćenje napretka**: Sistem poena, streak-ova i statistika učenja
-- **Leaderboard**: Rangiranje korisnika sa paginacijom i filterima
-- **Responzivni dizajn**: Optimizovan za desktop i mobilne uređaje
-- **Lokalno čuvanje podataka**: localStorage i sessionStorage integracija
+- **27+ jezika**: Podrška za evropske, azijske, afričke i američke jezike
+- **Interaktivne vežbe**: Multiple choice, translation i fill-in-the-blank zadaci
+- **Skill Tree vizualizacija**: Vizuelni prikaz napretka kroz lekcije
+- **Gamifikacija**: Sistem poena, streak-ova, dostignuća i rang lista
+- **API integracije**: Dictionary API za definicije reči i Quotable API za motivacione citate
+- **Napredni filteri**: Filtriranje po težini, regionu, popularnosti sa sortiranjem
+- **Leaderboard**: Globalno rangiranje sa paginacijom (5 korisnika po strani)
+- **Responzivni dizajn**: Potpuno optimizovan za sve uređaje
+- **Perzistencija podataka**: localStorage za trajno i sessionStorage za privremeno čuvanje
 
 ## 🛠️ Tehnologije
 
-- **React 18** sa TypeScript
-- **React Router Dom** za rutiranje
-- **React Context API** za state management
-- **CSS3** sa responsive dizajnom
-- **LocalStorage** za perzistentno čuvanje podataka
+- **React 18.3.1** - Moderna JavaScript biblioteka za izgradnju UI
+- **TypeScript 4.9.5** - Tipiziran superset JavaScript-a
+- **React Router Dom 6.28.0** - Deklarativno rutiranje
+- **React Context API** - Globalno upravljanje stanjem
+- **CSS3** - Moderan styling sa animacijama i media queries
+- **Web APIs**: 
+  - Free Dictionary API - Definicije reči i sinonimi
+  - Quotable API - Obrazovni i motivacioni citati
+- **LocalStorage & SessionStorage** - Perzistentno čuvanje podataka
 
 ## 📁 Struktura projekta
 
@@ -42,11 +49,15 @@ src/
 │   └── AppContext.tsx
 ├── hooks/               # Custom React hooks
 │   ├── useLocalStorage.ts
+│   ├── useSessionStorage.ts
 │   ├── usePageNavigation.ts
 │   └── useTimer.ts
 ├── models/              # Klase sa metodama
 │   ├── User.ts
 │   └── ExerciseManager.ts
+├── services/            # API servisi
+│   ├── languageService.ts
+│   └── quoteService.ts
 ├── types/               # TypeScript interfejsi
 │   └── index.ts
 ├── utils/               # Utility funkcije i mock data
@@ -58,16 +69,19 @@ src/
 
 ### Preduslovi
 
-- Node.js (v14 ili noviji)
-- npm ili yarn
+- **Node.js** (v14 ili noviji) - [Download](https://nodejs.org/)
+- **npm** (dolazi sa Node.js) ili **yarn**
+- **Git** - [Download](https://git-scm.com/)
+- Moderan web browser (Chrome, Firefox, Safari, Edge)
 
 ### Instalacija
 
 1. **Kloniraj repozitorijum:**
    ```bash
-   git clone https://github.com/username/seminarski-rad-web.git
+   git clone https://github.com/[username]/seminarski-rad-web.git
    cd seminarski-rad-web
    ```
+   *Napomena: Zamenite [username] sa vašim GitHub korisničkim imenom*
 
 2. **Instaliraj dependencies:**
    ```bash
@@ -80,7 +94,9 @@ src/
    ```
 
 4. **Otvori aplikaciju:**
-   Aplikacija će biti dostupna na `http://localhost:3000`
+   - Aplikacija će biti automatski otvorena u browseru
+   - Ako se ne otvori automatski, idite na: `http://localhost:3000`
+   - Za testiranje responzivnosti koristite Developer Tools (F12)
 
 ### Build za produkciju
 
@@ -88,34 +104,46 @@ src/
 npm run build
 ```
 
+Build fajlovi će biti kreirani u `build/` direktorijumu.
+
 ### Pokretanje testova
 
 ```bash
 npm test
 ```
 
+### Linting i type checking
+
+```bash
+# Provera TypeScript tipova
+npm run typecheck
+
+# ESLint provera
+npm run lint
+```
+
 ## 🎯 Implementirane funkcionalnosti
 
 ### Minimalni zahtevi ✅
 
-- ✅ **Git verzionisanje** - 20+ smislenih komitova
+- ✅ **Git verzionisanje** - 20+ smislenih komitova sa opisnim porukama
 - ✅ **5+ stranica** - Home, Languages, Exercise, Profile, Leaderboard, Login, Register
-- ✅ **3 reusable komponente** - Button, Card, Header
+- ✅ **3+ reusable komponente** - Button, Card, Header, SkillTree
 - ✅ **CSS stilizovanje** - Kompletno responzivni dizajn
 - ✅ **7+ TypeScript funkcionalnosti** - Različiti hooks, klase, interfejsi
 - ✅ **React hooks** - useState, useEffect, useContext, useNavigate, useLocation
-- ✅ **2 klase sa metodama** - User i ExerciseManager
-- ✅ **2 interfejsa** - User, Language, Exercise, itd.
+- ✅ **2+ klase sa metodama** - User, ExerciseManager, LanguageService, QuoteService
+- ✅ **Brojni interfejsi** - User, Language, Exercise, Achievement, Quote, itd.
 - ✅ **React Router** - Kompletan routing sistem
 - ✅ **Logička struktura** - Organizovani folderi za modele i komponente
-- ✅ **Paginacija** - Implementirana na Leaderboard stranici
-- ✅ **Smisleni filteri** - Po jeziku i težini
+- ✅ **Paginacija** - Implementirana na Leaderboard stranici (5 korisnika po strani)
+- ✅ **Napredni filteri** - Po jeziku, težini, regionu, popularnosti sa sortiranjem
 
 ### Dodatne funkcionalnosti za višu ocenu ✅
 
 - ✅ **Responzivnost** - Optimizovano za sve veličine ekrana
-- ✅ **API integracija** - Mock API podaci za jezike i vežbe
-- ✅ **LocalStorage** - Čuvanje korisničkih podataka i napretka
+- ✅ **2 API integracije** - Dictionary API i Quotable API
+- ✅ **LocalStorage & SessionStorage** - Trajno i privremeno čuvanje podataka
 
 ## 📚 Tipovi vežbi
 
@@ -157,10 +185,19 @@ Aplikacija je potpuno responzivna i optimizovana za:
 
 ## 🌐 Podržani jezici
 
-1. **English** (Engleski) - Beginner level
-2. **Deutsch** (Nemački) - Intermediate level
-3. **Français** (Francuski) - Intermediate level
-4. **Español** (Španski) - Beginner level
+Aplikacija podržava 27+ jezika organizovanih po regionima:
+
+### 🇪🇺 Evropski jezici
+- English, Spanish, French, German, Italian, Portuguese, Russian, Dutch, Swedish, Norwegian, Danish, Finnish, Polish, Czech, Hungarian, Romanian, Greek, Irish, Welsh
+
+### 🌏 Azijski jezici  
+- Chinese, Japanese, Korean, Hindi, Thai, Vietnamese, Arabic, Hebrew
+
+### 🌍 Afrički jezici
+- Swahili, Zulu
+
+### 🌎 Američki jezici
+- Navajo
 
 ## 🤝 Doprinošenje
 
@@ -170,9 +207,17 @@ Aplikacija je potpuno responzivna i optimizovana za:
 4. Push na branch (`git push origin feature/nova-funkcionalnost`)
 5. Otvori Pull Request
 
+## 🐛 Poznati problemi
+
+- API rate limiting može ograničiti broj zahteva
+- Quotes API ponekad vraća citate koji nisu direktno vezani za obrazovanje
+- Mock podaci se koriste za neke funkcionalnosti umesto pravog backend-a
+
 ## 📞 Kontakt
 
-Za pitanja ili predloge kontaktirajte autora preko GitHub-a.
+Za pitanja, predloge ili prijavu grešaka:
+- Otvorite Issue na GitHub repozitorijumu
+- Kontaktirajte preko GitHub profila
 
 ## 📄 Licenca
 
