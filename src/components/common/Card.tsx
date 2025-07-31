@@ -56,7 +56,7 @@ export const Card: React.FC<CardProps> = ({
     }
   };
 
-  const CardContent = () => (
+  const cardContent = (
     <>
       {loading && (
         <div className="card__loading">
@@ -113,14 +113,14 @@ export const Card: React.FC<CardProps> = ({
         aria-disabled={loading}
         style={style}
       >
-        <CardContent />
+        {cardContent}
       </div>
     );
   }
 
   return (
     <div className={cardClasses} style={style}>
-      <CardContent />
+      {cardContent}
     </div>
   );
 }; 
