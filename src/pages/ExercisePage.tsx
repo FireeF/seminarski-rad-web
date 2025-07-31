@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { usePageNavigation } from '../hooks/usePageNavigation';
 import { useTimer } from '../hooks/useTimer';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { ExerciseManager } from '../models/ExerciseManager';
@@ -18,6 +19,17 @@ const ExercisePage: React.FC = () => {
   const [userAnswer, setUserAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [lastResult, setLastResult] = useState<any>(null);
+  
+  // Session storage for temporary exercise progress
+  const [sessionProgress, setSessionProgress] = useSessionStorage(
+    `exercise-progress-${lessonId}`,
+    {
+      currentIndex: 0,
+      answers: [] as string[],
+      timeSpent: 0,
+      startedAt: Date.now()
+    }
+  );
 
   useEffect(() => {
     if (lessonId) {
@@ -31,7 +43,16 @@ const ExercisePage: React.FC = () => {
       const lesson = allLessons.find(l => l.id === lessonId);
       if (lesson) {
         const exercises = getExercisesByLanguage(lesson.languageId).filter(ex => ex.lessonId === lessonId);
-        setExerciseManager(new ExerciseManager(exercises));
+        const manager = new ExerciseManager(exercises);
+        
+        // Restore progress from session storage
+        if (sessionProgress.currentIndex > 0 && sessionProgress.currentIndex < exercises.length) {
+          for (let i = 0; i < sessionProgress.currentIndex; i++) {
+            manager.nextExercise();
+          }
+        }
+        
+        setExerciseManager(manager);
       }
     }
   }, [lessonId]);
@@ -46,7 +67,15 @@ const ExercisePage: React.FC = () => {
     if (result.correct) {
       updateScore(result.pointsEarned);
     }
-  }, [exerciseManager, userAnswer, updateScore]);
+    
+    // Update session progress
+    setSessionProgress(prev => ({
+      ...prev,
+      answers: [...prev.answers, userAnswer],
+      currentIndex: exerciseManager.getCurrentExerciseIndex(),
+      timeSpent: timer.time
+    }));
+  }, [exerciseManager, userAnswer, updateScore, setSessionProgress, timer.time]);
 
   const handleNextExercise = useCallback(() => {
     if (!exerciseManager) return;
