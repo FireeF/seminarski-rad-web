@@ -86,6 +86,7 @@ Language Learning Platform je interaktivna veb aplikacija za učenje stranih jez
 
 ### 2.3 Drvo komponenata
 
+#### Tekstualni prikaz:
 ```
 App
 ├── AppProvider (Context)
@@ -109,9 +110,35 @@ App
 │       │   ├── Card (reusable)
 │       │   └── Button (reusable)
 │       ├── LoginPage
+│       │   ├── Card (reusable)
 │       │   └── Button (reusable)
 │       └── RegisterPage
+│           ├── Card (reusable)
 │           └── Button (reusable)
+```
+
+#### Grafički prikaz hijerarhije:
+```
+                                    App.tsx
+                                       |
+                    +------------------+------------------+
+                    |                                     |
+              AppProvider                              Router
+              (Context)                                   |
+                                          +---------------+---------------+
+                                          |                               |
+                                       Header                          Routes
+                                    (reusable)                           |
+                                                        +----------------+----------------+
+                                                        |                                 |
+                                                   Page Components                  Common Components
+                                                        |                                 |
+                                          +-------------+-------------+           +-------+-------+
+                                          |                           |           |       |       |
+                                     HomePage                  LanguagesPage    Button  Card  Header
+                                     LoginPage                 ExercisePage   (reusable components)
+                                     RegisterPage              ProfilePage
+                                                              LeaderboardPage
 ```
 
 ## 3. Tehnologije, biblioteke i paketi
@@ -141,45 +168,58 @@ App
 ## 4. Korisničko uputstvo
 
 ### 4.1 Početna stranica
-![Home Page](screenshots/home.png)
-- Prikazuje pregled platforme
-- Motivacioni citat koji se učitava sa API-ja
-- Dugme za početak učenja
-- Statistike platforme
+- Prikazuje pregled platforme sa motivacionim citatom koji se dinamički učitava preko Quotable API
+- Statistike platforme (27+ jezika, 200+ lekcija, 1000+ vežbi)
+- Dugmad za početak učenja i pregled jezika
+- Prikaz najpopularnijih jezika sa zastavicama i opisima
+- Za prijavljene korisnike: prikaz trenutnog skora, streak-a i broja završenih lekcija
 
 ### 4.2 Registracija
-![Register Page](screenshots/register.png)
-- Forma za kreiranje naloga
-- Validacija podataka u realnom vremenu
-- Automatska prijava nakon registracije
+- Forma za kreiranje naloga sa poljima: username, email, password, confirm password
+- Validacija podataka (minimum 6 karaktera za lozinku, poklapanje lozinki)
+- Provera postojanja korisničkog imena
+- Automatska prijava nakon uspešne registracije
+- Link ka stranici za prijavu za postojeće korisnike
 
 ### 4.3 Izbor jezika
-![Languages Page](screenshots/languages.png)
-- Grid prikaz dostupnih jezika
-- Filteri po regionu (Europe, Asia, Americas)
-- Statistike za svaki jezik
-- Skill tree vizualizacija
+- Grid prikaz svih 27+ dostupnih jezika sa zastavicama
+- Napredni filteri:
+  - Po regionu (All, Popular, European, Asian, Other)
+  - Po težini (All Levels, Beginner, Intermediate, Advanced)
+  - Sortiranje (Popularity, Name A-Z, Difficulty, Number of Lessons)
+  - Opcija za prikaz samo aktivnih kurseva
+- Search bar za pretraživanje jezika
+- Skill tree vizualizacija za odabrani jezik sa progress tracking-om
+- AI generator lekcija dugme
 
 ### 4.4 Vežbanje
-![Exercise Page](screenshots/exercise.png)
-- Različiti tipovi vežbi
-- Progress bar za praćenje napretka
-- Instant feedback za odgovore
-- Sistem poena
+- Tri tipa vežbi:
+  - Multiple choice - izbor tačnog odgovora
+  - Translation - prevođenje reči/fraza
+  - Fill-in-blank - dopunjavanje rečenica
+- Progress bar koji pokazuje napredak kroz lekciju
+- Instant feedback sa objašnjenjem za svaki odgovor
+- Sistem poena sa bonus poenima za brzinu
+- Session storage čuva privremeni napredak
+- Timer koji meri vreme rešavanja
 
 ### 4.5 Profil
-![Profile Page](screenshots/profile.png)
-- Lične statistike
-- Lista dostignuća
-- Grafikon aktivnosti
-- Opcije personalizacije
+- Prikaz korisničkih informacija (username, email, datum pridruživanja)
+- Statistike: trenutni skor, ukupni skor, level, streak
+- Lista završenih lekcija
+- Sistem dostignuća sa filterima:
+  - Po statusu (All, Unlocked, Locked)
+  - Sortiranje (Progress, Name, Points)
+- Progress bar za svako dostignuće
+- Dugme za nastavak učenja
 
 ### 4.6 Rang lista
-![Leaderboard Page](screenshots/leaderboard.png)
-- Top korisnici po poenima
-- Filtriranje po jeziku
-- Paginacija (5 korisnika po strani)
-- Označen trenutni korisnik
+- Prikaz top korisnika sa rang brojem, username, jezikom, skorom i streak-om
+- Filtriranje po jeziku (All Languages, English, German, French, Spanish)
+- Paginacija sa 5 korisnika po strani
+- Navigacija kroz stranice (Previous, brojevi stranica, Next)
+- Označavanje trenutnog korisnika na listi
+- Prikaz ukupnog broja rezultata
 
 ## 5. Reprezentativni delovi koda
 
