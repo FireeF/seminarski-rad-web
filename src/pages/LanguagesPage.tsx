@@ -16,6 +16,8 @@ const LanguagesPage: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'beginner' | 'intermediate' | 'advanced'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'popular' | 'european' | 'asian' | 'other'>('all');
+  const [sortBy, setSortBy] = useState<'name' | 'difficulty' | 'lessons' | 'popularity'>('popularity');
+  const [showOnlyActive, setShowOnlyActive] = useState(false);
   const [isGeneratingLesson, setIsGeneratingLesson] = useState(false);
 
   useEffect(() => {
@@ -65,14 +67,31 @@ const LanguagesPage: React.FC = () => {
     return 'other';
   };
 
-  const filteredLanguages = state.languages.filter(lang => {
-    const matchesDifficulty = filter === 'all' || lang.difficulty === filter;
-    const matchesSearch = lang.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         lang.code.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = categoryFilter === 'all' || getLanguageCategory(lang.code) === categoryFilter;
-    
-    return matchesDifficulty && matchesSearch && matchesCategory;
-  });
+  const filteredLanguages = state.languages
+    .filter(lang => {
+      const matchesDifficulty = filter === 'all' || lang.difficulty === filter;
+      const matchesSearch = lang.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           lang.code.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = categoryFilter === 'all' || getLanguageCategory(lang.code) === categoryFilter;
+      const matchesActive = !showOnlyActive || lang.isActive;
+      
+      return matchesDifficulty && matchesSearch && matchesCategory && matchesActive;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'difficulty':
+          const difficultyOrder = { 'beginner': 0, 'intermediate': 1, 'advanced': 2 };
+          return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+        case 'lessons':
+          return b.totalLessons - a.totalLessons;
+        case 'popularity':
+        default:
+          // Assume popular languages have more lessons
+          return b.totalLessons - a.totalLessons;
+      }
+    });
 
   if (languageId && state.currentLanguage) {
     const lessons = getLessonsByLanguage(languageId);
@@ -213,6 +232,43 @@ const LanguagesPage: React.FC = () => {
             >
               🎯 Advanced
             </Button>
+          </div>
+          
+          {/* Additional Filters */}
+          <div style={{ marginTop: '1rem', display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <label htmlFor="sortBy" style={{ fontWeight: 'bold' }}>Sort by:</label>
+              <select
+                id="sortBy"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                style={{
+                  padding: '0.5rem',
+                  borderRadius: '6px',
+                  border: '2px solid #e0e0e0',
+                  fontSize: '1rem',
+                  cursor: 'pointer'
+                }}
+              >
+                <option value="popularity">Popularity</option>
+                <option value="name">Name (A-Z)</option>
+                <option value="difficulty">Difficulty</option>
+                <option value="lessons">Number of Lessons</option>
+              </select>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <input
+                type="checkbox"
+                id="showActive"
+                checked={showOnlyActive}
+                onChange={(e) => setShowOnlyActive(e.target.checked)}
+                style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+              />
+              <label htmlFor="showActive" style={{ cursor: 'pointer' }}>
+                Show only active courses
+              </label>
+            </div>
           </div>
         </div>
 

@@ -20,6 +20,7 @@ export interface Language {
   description: string;
   totalLessons: number;
   difficulty: 'beginner' | 'intermediate' | 'advanced';
+  isActive?: boolean;
 }
 
 export interface Exercise {

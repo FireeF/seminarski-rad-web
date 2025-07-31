@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { usePageNavigation } from '../hooks/usePageNavigation';
 import { Button } from '../components/common/Button';
@@ -7,6 +7,8 @@ import { Card } from '../components/common/Card';
 const ProfilePage: React.FC = () => {
   const { state } = useAppContext();
   const { navigate } = usePageNavigation();
+  const [achievementFilter, setAchievementFilter] = useState<'all' | 'unlocked' | 'locked'>('all');
+  const [sortAchievements, setSortAchievements] = useState<'name' | 'progress' | 'points'>('progress');
 
   if (!state.user) {
     return (

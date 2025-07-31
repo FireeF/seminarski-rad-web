@@ -21,6 +21,11 @@ export class ExerciseManager {
     return this.exercises[this.currentExerciseIndex];
   }
 
+  // Metoda za dobijanje trenutnog indeksa
+  getCurrentExerciseIndex(): number {
+    return this.currentExerciseIndex;
+  }
+
   // Metoda za submitting odgovora
   submitAnswer(userAnswer: string): ExerciseResult {
     const exercise = this.getCurrentExercise();
