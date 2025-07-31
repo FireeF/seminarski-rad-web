@@ -1,19 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { usePageNavigation } from '../hooks/usePageNavigation';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { mockLanguages } from '../utils/mockData';
+import { QuoteService, Quote } from '../services/quoteService';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
   const { state, setLanguages } = useAppContext();
   const { navigate } = usePageNavigation();
+  const [dailyQuote, setDailyQuote] = useState<Quote | null>(null);
+  const [loadingQuote, setLoadingQuote] = useState(true);
 
   useEffect(() => {
     // Load available languages
     setLanguages(mockLanguages);
   }, [setLanguages]);
+
+  useEffect(() => {
+    // Load motivational quote
+    const loadQuote = async () => {
+      setLoadingQuote(true);
+      const quote = await QuoteService.getRandomQuote('education');
+      setDailyQuote(quote);
+      setLoadingQuote(false);
+    };
+    loadQuote();
+  }, []);
 
   const handleGetStarted = () => {
     if (state.user) {
@@ -41,6 +55,44 @@ const HomePage: React.FC = () => {
               Learn languages through interactive exercises, track your progress, 
               and compete with learners worldwide. Start your journey today!
             </p>
+
+            {/* Daily Quote Section */}
+            {dailyQuote && (
+              <div className="daily-quote" style={{
+                margin: '2rem 0',
+                padding: '1.5rem',
+                backgroundColor: '#f8f9fa',
+                borderRadius: '12px',
+                borderLeft: '4px solid #58cc02'
+              }}>
+                <p style={{ 
+                  fontStyle: 'italic', 
+                  fontSize: '1.1rem',
+                  marginBottom: '0.5rem',
+                  color: '#333'
+                }}>
+                  "{dailyQuote.content}"
+                </p>
+                <p style={{ 
+                  textAlign: 'right', 
+                  color: '#666',
+                  fontSize: '0.9rem'
+                }}>
+                  — {dailyQuote.author}
+                </p>
+              </div>
+            )}
+            {loadingQuote && (
+              <div style={{
+                margin: '2rem 0',
+                padding: '1.5rem',
+                backgroundColor: '#f8f9fa',
+                borderRadius: '12px',
+                textAlign: 'center'
+              }}>
+                Loading daily inspiration...
+              </div>
+            )}
             
             <div className="hero__stats">
               <div className="stat">
